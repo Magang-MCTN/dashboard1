@@ -43,7 +43,7 @@ Route::group(['middleware' => 'administrator'], function () {
     // ...
 });
 Route::get('/pengajuan-barang', [PengadaanBarangController::class, 'index'])->middleware('auth');
-Route::post('/pengajuan-barang', [PengadaanBarangController::class, 'store'])->middleware('auth');
+Route::post('/pengajuan-barang', [PengadaanBarangController::class, 'store'])->name('barang')->middleware('auth');
 Route::get('/status-pengadaan', [PengadaanBarangController::class, 'status'])->middleware('auth');
 
 

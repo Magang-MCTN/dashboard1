@@ -11,7 +11,7 @@ class PengadaanBarangController extends Controller
     public function index()
     {
         // Menampilkan formulir pengajuan barang
-        return view('dasboard.pengajuan');
+        return view('dashboard.pengajuan');
     }
 
     public function store(Request $request)
@@ -23,7 +23,7 @@ class PengadaanBarangController extends Controller
             'jumlah' => $request->input('jumlah'),
             'harga' => $request->input('harga'),
             'tanggal_pengajuan' => now(),
-            'status' => 'pengajuan',
+            'status' => 'diajukan',
             'user_id' => auth()->user()->id,
         ]);
 
@@ -34,6 +34,6 @@ class PengadaanBarangController extends Controller
     {
         // Menampilkan status pengajuan barang oleh pengguna
         $pengadaanBarang = PengadaanBarang::where('user_id', auth()->user()->id)->get();
-        return view('user.status_pengadaan', compact('pengadaanBarang'));
+        return view('dashboard.status_pengajuan', compact('pengadaanBarang'));
     }
 }
