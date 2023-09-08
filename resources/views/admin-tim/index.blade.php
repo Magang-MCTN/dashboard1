@@ -36,17 +36,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if($pengajuan->status === 'diajukan')
-                                            <form action="{{ route('approveRequest', $pengajuan->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-success">Setujui</button>
-                                            </form>
-                                            <form action="{{ route('rejectRequest', $pengajuan->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger">Tolak</button>
-                                            </form>
+
                                             <a href="{{ route('admin-tim.detail', $pengajuan->id) }}" class="btn btn-info">Lihat Detail</a>
-                                        @endif
+
                                     </td>
                                 </tr>
                             @endforeach

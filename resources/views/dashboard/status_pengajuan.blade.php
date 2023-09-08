@@ -37,7 +37,8 @@
                                             <span class="badge badge-danger">Di Tolak</span>
                                         @endif
                                     </td>
-                                    <td class="btn btn-secondary"> Lihat </td>
+                                    <td><a href="{{ route('detail', $item->id) }}" class="btn btn-info">Lihat</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

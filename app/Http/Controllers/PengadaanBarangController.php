@@ -36,4 +36,10 @@ class PengadaanBarangController extends Controller
         $pengadaanBarang = PengadaanBarang::where('user_id', auth()->user()->id)->get();
         return view('dashboard.status_pengajuan', compact('pengadaanBarang'));
     }
+    public function detail($id)
+    {
+        $pengajuan = PengadaanBarang::findOrFail($id);
+
+        return view('dashboard.detail', compact('pengajuan'));
+    }
 }

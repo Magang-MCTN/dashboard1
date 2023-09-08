@@ -19,6 +19,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::get('/signature', [DashboardController::class, 'signature'])->name('signature')->middleware('auth');
+Route::post('/signature/upload', [DashboardController::class, 'store'])->name('signature.store')->middleware('auth');
+
+
+// Rute untuk memproses unggahan tanda tangan
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -43,9 +49,10 @@ Route::group(['middleware' => 'administrator'], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     // ...
 });
-Route::get('/pengajuan-barang', [PengadaanBarangController::class, 'index'])->middleware('auth');
+Route::get('/pengajuan-barang', [PengadaanBarangController::class, 'index'])->name('pengajuan-barang')->middleware('auth');
 Route::post('/pengajuan-barang', [PengadaanBarangController::class, 'store'])->name('barang')->middleware('auth');
-Route::get('/status-pengadaan', [PengadaanBarangController::class, 'status'])->middleware('auth');
+Route::get('/status-pengadaan', [PengadaanBarangController::class, 'status'])->name('status-pengadaan')->middleware('auth');
+Route::get('/status-pengadaan/{id}', [PengadaanBarangController::class, 'detail'])->name('detail')->middleware('auth');
 
 
 
