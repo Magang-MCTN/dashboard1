@@ -11,7 +11,7 @@ class AdminTimController extends Controller
     public function index()
     {
         // Tampilkan daftar pengajuan barang yang perlu ditinjau oleh admin tim
-        $pengajuanBarang = PengadaanBarang::where('status', 'pengajuan')->get();
+        $pengajuanBarang = PengadaanBarang::where('status', 'diajukan')->get();
         return view('admin-tim.index', compact('pengajuanBarang'));
     }
 
@@ -19,7 +19,7 @@ class AdminTimController extends Controller
     {
         // Menyetujui pengajuan barang
         $pengajuan = PengadaanBarang::findOrFail($id);
-        $pengajuan->status = 'disetujui';
+        $pengajuan->status = 'disetujui_admin_tim';
         $pengajuan->save();
 
         return redirect()->back()->with('success', 'Pengajuan barang telah disetujui.');
@@ -33,6 +33,12 @@ class AdminTimController extends Controller
         $pengajuan->save();
 
         return redirect()->back()->with('warning', 'Pengajuan barang telah ditolak.');
+    }
+    public function detail($id)
+    {
+        $pengajuan = PengadaanBarang::findOrFail($id);
+
+        return view('admin-tim.detail', compact('pengajuan'));
     }
 
     // Metode-metode lain sesuai kebutuhan

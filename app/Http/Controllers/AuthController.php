@@ -33,7 +33,7 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'level' => ['required', 'string', 'in:User,Admin Tim,Admin General,Administrator'], // Sesuaikan dengan level yang Anda butuhkan
+            'level' => ['string', 'in:User,Admin Tim,Admin General,Administrator'], // Sesuaikan dengan level yang Anda butuhkan
         ]);
 
         User::create([

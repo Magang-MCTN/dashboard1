@@ -25,16 +25,17 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middl
 Route::group(['middleware' => 'admin-tim'], function () {
     // Rute-rute yang hanya dapat diakses oleh admin tim
     Route::get('/admin-tim', [AdminTimController::class, 'index'])->name('admintim');
-    Route::get('/admin-tim/approve/{id}', [AdminTimController::class, 'approveRequest'])->name('approveRequest');
-    Route::get('/admin-tim/reject/{id}', [AdminTimController::class, 'rejectRequest'])->name('rejectRequest');
+    Route::get('/admin-tim/detail/{id}', [AdminTimController::class, 'detail'])->name('admin-tim.detail');
+    Route::post('/admin-tim/approve/{id}', [AdminTimController::class, 'approveRequest'])->name('approveRequest');
+    Route::post('/admin-tim/reject/{id}', [AdminTimController::class, 'rejectRequest'])->name('rejectRequest');
 
     // ...
 });
 Route::group(['middleware' => 'admin-general'], function () {
     // Rute-rute yang hanya dapat diakses oleh admin tim
     Route::get('/admin-general', [AdminGeneralController::class, 'index'])->name('admingeneral');
-    Route::get('/admin-general/approve/{id', [AdminGeneralController::class, 'index'])->name('approvegeneral');
-    Route::get('/admin-general/reject/{id}', [AdminGeneralController::class, 'rejectRequest'])->name('rejectgeneral');
+    Route::post('/admin-general/approve/{id}', [AdminGeneralController::class, 'approveRequesta'])->name('admin-general.approve');
+    Route::post('/admin-general/reject/{id}', [AdminGeneralController::class, 'rejectRequesta'])->name('admin-general.reject');
     // ...
 });
 Route::group(['middleware' => 'administrator'], function () {
