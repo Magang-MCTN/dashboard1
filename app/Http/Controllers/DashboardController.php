@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PengadaanBarang;
 use App\Models\Signature;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,6 +24,8 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         // Validasi request
+
+
         $request->validate([
             'signature' => 'required|image|mimes:png|max:2048', // Gambar tanda tangan harus berformat PNG dan tidak melebihi 2MB.
         ]);

@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::get('/signature', [DashboardController::class, 'signature'])->name('signature')->middleware('auth');
 Route::post('/signature/upload', [DashboardController::class, 'store'])->name('signature.store')->middleware('auth');
+Route::get('/generate-pdf', [DashboardController::class, 'store'])->name('signature.store')->middleware('auth');
+Route::get('/generate-pdf', [PengadaanBarangController::class, 'generatePengajuanBarangPdf'])->name('generatepdf')->middleware('auth');
+Route::get('/generate-pdf/{id}', [PengadaanBarangController::class, 'generatePdf'])->name('generatepdfid')->middleware('auth');
 
 
 // Rute untuk memproses unggahan tanda tangan

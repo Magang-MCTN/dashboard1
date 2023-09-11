@@ -18,9 +18,13 @@ class AdminGeneralController extends Controller
     public function approveRequesta(Request $request, $id)
     {
         // Menyetujui pengajuan barang
+        $admingeneral = auth()->user();
         $pengadaan = PengadaanBarang::findOrFail($id);
         $pengadaan->status = 'disetujui_admin_general';
         $pengadaan->save();
+        $pengajuanBarang = PengadaanBarang::find($id); // Sesuaikan dengan cara Anda mengidentifikasi pengajuan
+        $pengajuanBarang->admin_general_id = $admingeneral->id;
+        $pengajuanBarang->save();
 
         return redirect()->back()->with('success', 'Pengajuan barang telah disetujui.');
     }

@@ -33,7 +33,7 @@
 
                     <div  class="d-flex justify-content-end btn-wrapper">
                         <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a>
-                        <a href="#" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
+                        <a href="{{ url('/generate-pdf/'.$pengajuan->id) }}" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
                         <a href="#" class="btn btn-otline-dark"><i class="icon-download"></i> Export</a>
                       </div>
                 </div>

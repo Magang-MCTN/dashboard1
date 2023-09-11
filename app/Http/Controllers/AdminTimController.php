@@ -18,10 +18,13 @@ class AdminTimController extends Controller
     public function approveRequest(Request $request, $id)
     {
         // Menyetujui pengajuan barang
+        $adminTim = auth()->user();
         $pengajuan = PengadaanBarang::findOrFail($id);
         $pengajuan->status = 'disetujui_admin_tim';
         $pengajuan->save();
-
+        $pengajuanBarang = PengadaanBarang::find($id); // Sesuaikan dengan cara Anda mengidentifikasi pengajuan
+        $pengajuanBarang->admin_tim_id = $adminTim->id;
+        $pengajuanBarang->save();
         return redirect()->back()->with('success', 'Pengajuan barang telah disetujui.');
     }
 
