@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminTimController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PengadaanBarangController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +46,7 @@ Route::group(['middleware' => 'admin-general'], function () {
     Route::get('/admin-general', [AdminGeneralController::class, 'index'])->name('admingeneral');
     Route::post('/admin-general/approve/{id}', [AdminGeneralController::class, 'approveRequesta'])->name('admin-general.approve');
     Route::post('/admin-general/reject/{id}', [AdminGeneralController::class, 'rejectRequesta'])->name('admin-general.reject');
+    Route::get('/admin-general/detail/{id}', [AdminGeneralController::class, 'detail'])->name('admin-general.detail');
     // ...
 });
 Route::group(['middleware' => 'administrator'], function () {
@@ -68,3 +70,13 @@ Route::post('/store', [AuthController::class, 'store'])->name('store');
 
 // Rute untuk logout
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// tes notif
+// Route::get('/notif', function () {
+//     $user = \app\User::first();
+//     $user->notify(new \App\Notifications\Daftar);
+// });
+Route::get('/notif', function () {
+    $user = \App\Models\User::first();
+    $user->notify(new \App\Notifications\Daftar);
+});

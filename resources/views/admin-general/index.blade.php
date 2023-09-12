@@ -34,16 +34,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if($pengajuan->status === 'disetujui_admin_tim')
-                                            <form action="{{ route('admin-general.approve', $pengajuan->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-success">Setujui</button>
-                                            </form>
-                                            <form action="{{ route('admin-general.reject', $pengajuan->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger">Tolak</button>
-                                            </form>
-                                        @endif
+                                        <a href="{{ route('admin-general.detail', $pengajuan->id) }}" class="btn btn-info">Lihat Detail</a>
                                     </td>
                                 </tr>
                             @endforeach

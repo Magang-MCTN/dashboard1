@@ -93,7 +93,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'name' => 'PT MCTN',
     ],
 
     /*
@@ -115,4 +115,7 @@ return [
         ],
     ],
 
+    'assets' => [
+        'email' => 'public/dashboard/template/images', // Gantilah dengan path ke direktori tempat Anda menyimpan logo
+    ],
 ];

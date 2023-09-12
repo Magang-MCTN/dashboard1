@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PengadaanBarang;
 use App\Models\Signature;
+use App\Models\User;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -77,12 +78,21 @@ class PengadaanBarangController extends Controller
         // Ambil gambar tanda tangan admin general
         $adminGeneralSignature = Signature::where('user_id', $adminGeneralUserId)->first();
 
+        // Ambil nama admin tim
+        $adminTimName = User::where('id', $adminTimUserId)->value('name');
+
+        // Ambil nama admin general
+        $adminGeneralName = User::where('id', $adminGeneralUserId)->value('name');
+
         // // Ambil tanda tangan admin tim
         // $adminTimSignature = Signature::find($pengajuanBarang->admin_tim_id);
 
         // // Ambil tanda tangan admin general
         // $adminGeneralSignature = Signature::find($pengajuanBarang->admin_general_id);
-
+        $path_logo = base_path('public/dashboard/template/images/MCTN.png');
+        $types = pathinfo($path_logo, PATHINFO_EXTENSION);
+        $datas = file_get_contents($path_logo);
+        $pics = 'data:public/dashboard/template/images/' . $types . ';base64,' . base64_encode($datas);
         // Load view PDF yang telah Anda buat
         $path = base_path('storage/app/public/signatures/' . $adminTimSignature->signature);
         $type = pathinfo($path, PATHINFO_EXTENSION);
@@ -92,7 +102,7 @@ class PengadaanBarangController extends Controller
         $typea = pathinfo($patha, PATHINFO_EXTENSION);
         $dataa = file_get_contents($patha);
         $pica = 'data:storage/app/public/signatures/' . $typea . ';base64,' . base64_encode($dataa);
-        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewid', compact('pengajuanBarang', 'adminTimSignature', 'adminGeneralSignature', 'pic', 'pica'));
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewid', compact('pengajuanBarang', 'adminTimSignature', 'adminGeneralSignature', 'pic', 'pica', 'adminTimName', 'adminGeneralName', 'pics'));
 
         // Atur nama file PDF yang akan dihasilkan
         $pdf->setPaper('A4', 'portrait'); // Atur ukuran dan orientasi kertas

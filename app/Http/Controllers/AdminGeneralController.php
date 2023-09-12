@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PengadaanBarang;
+use App\Notifications\ApprovalNotification;
 use Illuminate\Http\Request;
 
 
@@ -25,6 +26,7 @@ class AdminGeneralController extends Controller
         $pengajuanBarang = PengadaanBarang::find($id); // Sesuaikan dengan cara Anda mengidentifikasi pengajuan
         $pengajuanBarang->admin_general_id = $admingeneral->id;
         $pengajuanBarang->save();
+        $pengajuanBarang->user->notify(new ApprovalNotification($pengajuanBarang));
 
         return redirect()->back()->with('success', 'Pengajuan barang telah disetujui.');
     }
@@ -37,5 +39,11 @@ class AdminGeneralController extends Controller
         $pengadaan->save();
 
         return redirect()->back()->with('warning', 'Pengajuan barang telah ditolak.');
+    }
+    public function detail($id)
+    {
+        $pengajuan = PengadaanBarang::findOrFail($id);
+
+        return view('admin-general.detail', compact('pengajuan'));
     }
 }

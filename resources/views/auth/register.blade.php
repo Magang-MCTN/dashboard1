@@ -62,7 +62,7 @@
                                             @enderror
                                             <input id="password-confirm" type="password" placeholder="Confirm Password" class="form-control" name="password_confirmation" required autocomplete="new-password"><br>
                                             <select id="level" class="form-control @error('level') is-invalid @enderror" name="level" required>
-                                                <option value="user">User</option>
+                                                <option value="User">User</option>
                                                 <option value="Admin Tim">Admin Tim</option>
                                                 <option value="Admin General">Admin General</option>
                                                 <option value="Administrator">Administrator</option>

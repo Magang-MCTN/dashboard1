@@ -63,7 +63,7 @@
       <div class="navbar-menu-wrapper d-flex align-items-top">
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">{{ auth()->user()->name }}</span></h1>
+            <h1 class="welcome-text">Selamat Datang <span class="text-black fw-bold">{{ auth()->user()->name }}</span></h1>
             <h3 class="welcome-sub-text">Anda Login sebagai <span class="text-black fw-bold"> {{ auth()->user()->level }}</span></h3>
           </li>
         </ul>
@@ -451,12 +451,12 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="menu-icon mdi mdi-layers-outline"></i>
-              <span class="menu-title">Icons</span>
+              <span class="menu-title">SIGNATURE</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/signature">Signature</a></li>
               </ul>
             </div>
           </li>
