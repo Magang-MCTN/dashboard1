@@ -30,6 +30,12 @@
                             <label for="harga">Harga</label>
                             <input type="number" name="harga" id="harga" class="form-control" required>
                         </div>
+                        <label for="admin_tim">Pilih Admin Tim Tujuan:</label>
+<select id="admin_tim" name="admin_tim">
+    <option value="Admin Tim 1">Admin Tim 1</option>
+    <option value="Admin Tim 2">Admin Tim 2</option>
+    <!-- Tambahkan pilihan admin tim lainnya sesuai kebutuhan -->
+</select>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

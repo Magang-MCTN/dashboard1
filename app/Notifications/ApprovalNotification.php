@@ -41,10 +41,12 @@ class ApprovalNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Pemberitahuan Pengajuan Barang')
-            ->line('Pengajuan barang Anda telah disetujui')
-            ->action('Lihat Detail', url('/'))
-            ->line('Terima kasih atas pengajuan Anda.');
+
+            // ->view('vendor.notifications.email', compact('pics'))
+            ->line('Selamat Pengajuan Anda Telah Disetujui, SIlahkan Klik Dibawah ini untuk masuk ke pengajuan anda ')
+            ->action('Klik Disini', url('/'))
+            ->line('Terimakasih Telah Mengajukan Barang')
+            ->line('PT MANDAU CIPTA TENAGA NUSANTARA');
     }
 
     /**

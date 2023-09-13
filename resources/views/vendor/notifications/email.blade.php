@@ -1,14 +1,8 @@
-<tr>
-    <td class="header">
-    {{-- <a href="{{ $url }}" style="display: inline-block;"> --}}
-    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('logo.png'))) }}" class="logo" >
-
-    </td>
-    </tr>
 @component('mail::message')
 {{-- <img src="{{ asset('logo.png') }}" alt="Logo" width="100"> --}}
 
 {{-- Greeting --}}
+
 
 @if (! empty($greeting))
 # {{ $greeting }}
@@ -55,6 +49,7 @@
 @else
 @lang('Regards'),<br>
 {{ config('app.name') }}
+
 {{-- <p>PT MCTN</p> --}}
 @endif
 

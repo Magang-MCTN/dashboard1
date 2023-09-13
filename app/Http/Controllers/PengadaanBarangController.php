@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\PengadaanBarang;
 use App\Models\Signature;
 use App\Models\User;
+use App\Notifications\Daftar;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 use PDF;
 
 
@@ -20,6 +23,7 @@ class PengadaanBarangController extends Controller
 
     public function store(Request $request)
     {
+
         // Menyimpan pengajuan barang yang diajukan oleh pengguna
         PengadaanBarang::create([
             'nama_barang' => $request->input('nama_barang'),
@@ -30,7 +34,8 @@ class PengadaanBarangController extends Controller
             'status' => 'diajukan',
             'user_id' => auth()->user()->id,
         ]);
-
+        $adminTim = User::where('level', 'Admin Tim')->get(); // Sesuaikan dengan cara Anda mendapatkan admin tim
+        FacadesNotification::send($adminTim, new Daftar());
         return redirect('/status-pengadaan')->with('success', 'Pengajuan barang berhasil disampaikan.');
     }
 

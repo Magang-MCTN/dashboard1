@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminTimController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PengadaanBarangController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,8 @@ Route::get('/pengajuan-barang', [PengadaanBarangController::class, 'index'])->na
 Route::post('/pengajuan-barang', [PengadaanBarangController::class, 'store'])->name('barang')->middleware('auth');
 Route::get('/status-pengadaan', [PengadaanBarangController::class, 'status'])->name('status-pengadaan')->middleware('auth');
 Route::get('/status-pengadaan/{id}', [PengadaanBarangController::class, 'detail'])->name('detail')->middleware('auth');
+//Profile
+Route::get('/profile', [ProfileController::class, 'profile'])->name('profile')->middleware('auth');
 
 
 

@@ -44,9 +44,9 @@ class Daftar extends Notification
         return (new MailMessage)
 
             // ->view('vendor.notifications.email', compact('pics'))
-            ->line('Selamat Pengajuan Anda Telah Disetujui, SIlahkan Klik Dibawah ini untuk masuk ke pengajuan anda ')
+            ->line('Ada pengajuan barang baru yang perlu ditinjau ')
             ->action('Klik Disini', url('/'))
-            ->line('Terimakasih Telah Mengajukan Barang')
+            ->line('Terimakasih ')
             ->line('PT MANDAU CIPTA TENAGA NUSANTARA');
     }
 
