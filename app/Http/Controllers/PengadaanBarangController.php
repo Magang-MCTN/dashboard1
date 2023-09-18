@@ -17,33 +17,51 @@ class PengadaanBarangController extends Controller
 {
     public function index()
     {
+        $adminTimList = User::where('level', 'Admin Tim')->pluck('name', 'id');
         // Menampilkan formulir pengajuan barang
-        return view('dashboard.pengajuan');
+        return view('dashboard.pengajuan', compact('adminTimList'));
     }
 
     public function store(Request $request)
     {
+        $pengajuan = new PengadaanBarang;
+        $pengajuan->nama_barang = $request->input('nama_barang'); // Set nama_barang dari input pengguna
+        $pengajuan->nomor_pengadaan = $request->input('nomor_pengadaan');
+        $pengajuan->jumlah = $request->input('jumlah');
+        $pengajuan->harga = $request->input('harga');
+        $pengajuan->tanggal_pengajuan = now();
+        $pengajuan->status = 'diajukan';
+        $pengajuan->admintim = $request->input('admintim');
+        $pengajuan->user_id = auth()->user()->id;
 
-        // Menyimpan pengajuan barang yang diajukan oleh pengguna
-        PengadaanBarang::create([
-            'nama_barang' => $request->input('nama_barang'),
-            'nomor_pengadaan' => $request->input('nomor_pengadaan'),
-            'jumlah' => $request->input('jumlah'),
-            'harga' => $request->input('harga'),
-            'tanggal_pengajuan' => now(),
-            'status' => 'diajukan',
-            'user_id' => auth()->user()->id,
-        ]);
-        $adminTim = User::where('level', 'Admin Tim')->get(); // Sesuaikan dengan cara Anda mendapatkan admin tim
-        FacadesNotification::send($adminTim, new Daftar());
+        $pengajuan->save();
+
+        $adminTim = User::find($request->admintim); // Gantilah dengan cara Anda mendapatkan admin tim berdasarkan ID
+        $adminTim->notify(new Daftar($pengajuan));
+        // $adminTim = User::where('level', 'Admin Tim')->get(); // Sesuaikan dengan cara Anda mendapatkan admin tim
+        // FacadesNotification::send($adminTim, new Daftar());
         return redirect('/status-pengadaan')->with('success', 'Pengajuan barang berhasil disampaikan.');
     }
 
-    public function status()
+    public function status(Request $request)
     {
-        // Menampilkan status pengajuan barang oleh pengguna
-        $pengadaanBarang = PengadaanBarang::where('user_id', auth()->user()->id)->get();
-        return view('dashboard.status_pengajuan', compact('pengadaanBarang'));
+        $selectedStatus = $request->input('status', 'semua');
+        $searchKeyword = $request->input('search');
+
+        $query = PengadaanBarang::query();
+
+        if ($selectedStatus !== 'semua') {
+            $query->where('status', $selectedStatus);
+        }
+
+        if ($searchKeyword) {
+            $query->where('nama_barang', 'like', '%' . $searchKeyword . '%');
+        }
+
+        $pengadaanBarang = $query->get();
+        $pengadaanBarangUser = PengadaanBarang::where('user_id', auth()->user()->id)->get();
+
+        return view('dashboard.status_pengajuan', compact('pengadaanBarang', 'selectedStatus', 'pengadaanBarangUser', 'searchKeyword'));
     }
     public function detail($id)
     {

@@ -66,7 +66,8 @@
                                                 <option value="Admin Tim">Admin Tim</option>
                                                 <option value="Admin General">Admin General</option>
                                                 <option value="Administrator">Administrator</option>
-                                            </select><br>
+                                            </select>
+                                            <p class="py-2">Already have an account? <a href="/login">Login here</a></p>
                                             @error('level')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

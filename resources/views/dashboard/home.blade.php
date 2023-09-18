@@ -2,14 +2,88 @@
 
 @section('content')
  <!-- partial -->
-
+<link rel="stylesheet" href="{{ asset('dashboard\template\css\cards.css') }}">
     <!-- partial -->
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="row">
           <div class="col-sm-12">
             <div class="home-tab">
-              <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+              <div class="row">
+
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="card py-2">
+                        <div class="card-body d-flex align-self-center">
+                            <div class="row no-gutters align-items-center d-flex justify-content-evenly">
+                                <div class="col mr-2">
+                                    <div class="card-title fw-bold">
+                                        Banyak Barang</div>
+                                    <div class="card-title" style="font-size: 24px">a993</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="mdi mdi-archive" style="color: #097b96"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="card py-2">
+                      <div class="card-body d-flex align-self-center">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="card-title fw-bold">
+                                        Barang Diajukan</div>
+                                    <div class="card-title" style="font-size: 24px">412</div>
+                                </div>
+                                <div class="col-auto">
+                                  <i class="mdi mdi-file-document" style="color: #097b96"></i>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="card py-2">
+                      <div class="card-body d-flex align-self-center">
+                          <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                  <div class="card-title fw-bold">
+                                      Barang Disetujui</div>
+                                  <div class="card-title" style="font-size: 24px">412</div>
+                              </div>
+                              <div class="col-auto">
+                                <i class="mdi mdi-file-check" style="color: #097b96"></i>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="card py-2">
+                      <div class="card-body d-flex align-self-center">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="card-title fw-bold">
+                                        Barang Ditolak</div>
+                                    <div class="card-title" style="font-size: 24px">412</div>
+                                </div>
+                                <div class="col-auto">
+                                  <i class="mdi mdi-file-excel" style="color:#097b96"></i>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              {{-- <div class="d-sm-flex align-items-center justify-content-between border-bottom">
                 <ul class="nav nav-tabs" role="tablist">
                   <li class="nav-item">
                     <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
@@ -24,19 +98,23 @@
                     <a class="nav-link border-0" id="more-tab" data-bs-toggle="tab" href="#more" role="tab" aria-selected="false">More</a>
                   </li>
                 </ul>
-                <div>
+
+                {{-- Tombol share dkk --}}
+                {{-- <div>
                   <div class="btn-wrapper">
                     <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a>
                     <a href="#" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
                     <a href="#" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
                   </div>
                 </div>
-              </div>
+              </div> --}}
+
+
               <div class="tab-content tab-content-basic">
                 <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
                   <div class="row">
                     <div class="col-sm-12">
-                      <div class="statistics-details d-flex align-items-center justify-content-between">
+                      {{-- <div class="statistics-details d-flex align-items-center justify-content-between">
                         <div>
                           <p class="statistics-title">Bounce Rate</p>
                           <h3 class="rate-percentage">32.53%</h3>
@@ -67,13 +145,14 @@
                           <h3 class="rate-percentage">2m:35s</h3>
                           <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
                         </div>
-                      </div>
+                      </div> --}}
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-8 d-flex flex-column">
-                      <div class="row flex-grow">
+                      {{-- <div class="row flex-grow">
                         <div class="col-12 grid-margin stretch-card">
+
                           <div class="card card-rounded">
                             <div class="card-body">
                               <div class="d-sm-flex justify-content-between align-items-start">
@@ -105,19 +184,19 @@
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> --}}
                       <div class="row flex-grow">
                         <div class="col-12 grid-margin stretch-card">
                           <div class="card card-rounded">
                             <div class="card-body">
                               <div class="d-sm-flex justify-content-between align-items-start">
                                 <div>
-                                  <h4 class="card-title card-title-dash">Pending Requests</h4>
-                                 <p class="card-subtitle card-subtitle-dash">You have 50+ new requests</p>
+                                  <h4 class="card-title card-title-dash">Barang diajukan</h4>
+                                 <p class="card-subtitle card-subtitle-dash">Ada (sekian) barang yang telah diajukan</p>
                                 </div>
-                                <div>
+                                {{-- <div>
                                   <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-account-plus"></i>Add new member</button>
-                                </div>
+                                </div> --}}
                               </div>
                               <div class="table-responsive  mt-1">
                                 <table class="table select-table">
@@ -126,35 +205,33 @@
                                       <th>
                                         <div class="form-check form-check-flat mt-0">
                                           <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
                                         </div>
                                       </th>
-                                      <th>Customer</th>
-                                      <th>Company</th>
-                                      <th>Progress</th>
+                                      <th>User</th>
+                                      <th>Nama Pengadaan</th>
+                                      <th>No. Pengadaan</th>
                                       <th>Status</th>
                                     </tr>
                                   </thead>
                                   <tbody>
+                                    <?php for ($i = 1; $i <= 5; $i++) { ?>
                                     <tr>
                                       <td>
                                         <div class="form-check form-check-flat mt-0">
                                           <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
                                         </div>
                                       </td>
                                       <td>
                                         <div class="d-flex ">
                                           <img src="/dashboard/template/images/faces/face1.jpg" alt="">
                                           <div>
-                                            <h6>Brandon Washington</h6>
-                                            <p>Head admin</p>
+                                            <h6>{{ auth()->user()->name }}</h6>
+                                            <p>{{ auth()->user()->level }}</p>
                                           </div>
                                         </div>
                                       </td>
                                       <td>
-                                        <h6>Company name 1</h6>
-                                        <p>company type</p>
+                                        <h6>LAPTOP</h6>
                                       </td>
                                       <td>
                                         <div>
@@ -169,138 +246,7 @@
                                       </td>
                                       <td><div class="badge badge-opacity-warning">In progress</div></td>
                                     </tr>
-                                    <tr>
-                                      <td>
-                                        <div class="form-check form-check-flat mt-0">
-                                          <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div class="d-flex">
-                                          <img src="/dashboard/template/images/faces/face2.jpg" alt="">
-                                          <div>
-                                            <h6>Laura Brooks</h6>
-                                            <p>Head admin</p>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h6>Company name 1</h6>
-                                        <p>company type</p>
-                                      </td>
-                                      <td>
-                                        <div>
-                                          <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                            <p class="text-success">65%</p>
-                                            <p>85/162</p>
-                                          </div>
-                                          <div class="progress progress-md">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td><div class="badge badge-opacity-warning">In progress</div></td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <div class="form-check form-check-flat mt-0">
-                                          <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div class="d-flex">
-                                          <img src="/dashboard/template/images/faces/face3.jpg" alt="">
-                                          <div>
-                                            <h6>Wayne Murphy</h6>
-                                            <p>Head admin</p>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h6>Company name 1</h6>
-                                        <p>company type</p>
-                                      </td>
-                                      <td>
-                                        <div>
-                                          <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                            <p class="text-success">65%</p>
-                                            <p>85/162</p>
-                                          </div>
-                                          <div class="progress progress-md">
-                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 38%" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"></div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td><div class="badge badge-opacity-warning">In progress</div></td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <div class="form-check form-check-flat mt-0">
-                                          <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div class="d-flex">
-                                          <img src="/dashboard/template/images/faces/face4.jpg" alt="">
-                                          <div>
-                                            <h6>Matthew Bailey</h6>
-                                            <p>Head admin</p>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h6>Company name 1</h6>
-                                        <p>company type</p>
-                                      </td>
-                                      <td>
-                                        <div>
-                                          <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                            <p class="text-success">65%</p>
-                                            <p>85/162</p>
-                                          </div>
-                                          <div class="progress progress-md">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td><div class="badge badge-opacity-danger">Pending</div></td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <div class="form-check form-check-flat mt-0">
-                                          <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div class="d-flex">
-                                          <img src="/dashboard/template/images/faces/face5.jpg" alt="">
-                                          <div>
-                                            <h6>Katherine Butler</h6>
-                                            <p>Head admin</p>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h6>Company name 1</h6>
-                                        <p>company type</p>
-                                      </td>
-                                      <td>
-                                        <div>
-                                          <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                            <p class="text-success">65%</p>
-                                            <p>85/162</p>
-                                          </div>
-                                          <div class="progress progress-md">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td><div class="badge badge-opacity-success">Completed</div></td>
-                                    </tr>
+                                    <?php } ?>
                                   </tbody>
                                 </table>
                               </div>

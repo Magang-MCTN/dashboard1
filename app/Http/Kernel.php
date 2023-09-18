@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'admin-tim' => \App\Http\Middleware\AdminTimMiddleware::class,
         'admin-general' => \App\Http\Middleware\AdminGeneralMiddleware::class,
         'administrator' => \App\Http\Middleware\AdministratorMiddleware::class,
+        'admin.tim.redirect' => \App\Http\Middleware\AdminTimRedirect::class,
     ];
 }

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class Daftar extends Notification
+class RejectNotification extends Notification
 {
     use Queueable;
     protected $pengajuan;
@@ -20,6 +20,13 @@ class Daftar extends Notification
     {
         $this->pengajuan = $pengajuan;
     }
+
+    /**
+     * Create a new notification instance.
+     *
+     * @return void
+     */
+
 
     /**
      * Get the notification's delivery channels.
@@ -40,14 +47,15 @@ class Daftar extends Notification
      */
     public function toMail($notifiable)
     {
-
-
         return (new MailMessage)
 
+            // ->view('vendor.notifications.email', compact('pics'))
             ->line('ID Pengajuan: ' . $this->pengajuan->id)
             ->line('Diajukan oleh: ' . $this->pengajuan->user->name)
-            ->action('Lihat Pengajuan', route('persetujuan-barang', ['id' => $this->pengajuan->id]))
-            ->line('Terimakasih ')
+            ->line('Permintaan Anda Telah Ditolak  ')
+            ->line('Dengan Alasan ' . $this->pengajuan->alasan)
+            ->action('Klik Disini Untuk melihat', route('pengajuan-barang', ['id' => $this->pengajuan->id]))
+            ->line('Terimakasih Telah Mengajukan Barang')
             ->line('PT MANDAU CIPTA TENAGA NUSANTARA');
     }
 

@@ -6,15 +6,23 @@ use Illuminate\Http\Request;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Signature;
 use Illuminate\Foundation\Auth\User;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileController extends Controller
 {
-    public function profile(){
-        $iduser = Auth::id();
-        $profile = Profile::where('id',$iduser)->first();
-        return view('profile.tampil',['users'=>$profile]);
+    public function profile($id)
+    {
+        $user = auth()->user(); // Mengambil pengguna yang sedang masuk
+        // $signature = $user->signature; // Mengambil tanda tangan dari relasi
+        $signature = Signature::where('user_id', $id)->first();
+        // Mengambil pengguna yang sedang masuk
+
+
+        $profile = Profile::where('id', $id)->first();
+        $users = $profile;
+        return view('profile.tampil', compact('users', 'signature'));
     }
     // public function update(request $request, $id){
     //     $request->validate([

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PengadaanBarang;
 use App\Notifications\ApprovalNotification;
+use App\Notifications\RejectNotification;
 use Illuminate\Http\Request;
 
 
@@ -33,6 +34,14 @@ class AdminGeneralController extends Controller
 
     public function rejectRequesta(Request $request, $id)
     {
+        $admingeneral = auth()->user();
+        $pengadaan = PengadaanBarang::findOrFail($id);
+        $pengadaan->status = 'ditolak';
+        $pengadaan->save();
+        $pengajuanBarang = PengadaanBarang::find($id); // Sesuaikan dengan cara Anda mengidentifikasi pengajuan
+        $pengajuanBarang->admin_general_id = $admingeneral->id;
+        $pengajuanBarang->save();
+        $pengajuanBarang->user->notify(new RejectNotification($pengajuanBarang));
         // Menolak pengajuan barang
         $pengadaan = PengadaanBarang::findOrFail($id);
         $pengadaan->status = 'ditolak';

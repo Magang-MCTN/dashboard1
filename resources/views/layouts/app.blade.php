@@ -25,7 +25,7 @@
 </head>
 <body>
   <div class="container-scroller">
-    <div class="row p-0 m-0 proBanner" id="proBanner">
+    {{-- <div class="row p-0 m-0 proBanner" id="proBanner">
       <div class="col-md-12 p-0 m-0">
         <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
           <div class="ps-lg-1">
@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
@@ -197,12 +197,12 @@
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
               <img class="img-xs rounded-circle" src="{{ asset('dashboard/template/images/faces/face8.jpg') }}" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-              <div class="dropdown-header text-center">
+              <div class="dropdown-header text-center mx-4">
                 <img class="img-md rounded-circle" src="{{ asset('dashboard/template/images/faces/face8.jpg') }}" alt="Profile image">
                 <p class="mb-1 mt-3 font-weight-semibold">{{ auth()->user()->name }}</p>
                 <p class="fw-light text-muted mb-0">{{ auth()->user()->email }}</p>
               </div>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
+              <a class="dropdown-item" href="/profile/{{ auth()->user()->id}}"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
@@ -490,18 +490,18 @@
       </nav>
       <!-- partial -->
       @yield('content')
-      <footer class="footer">
-        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
-          <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
-        </div>
-      </footer>
       <!-- partial -->
     </div>
     <!-- main-panel ends -->
   </div>
   <!-- page-body-wrapper ends -->
 </div>
+<footer class="footer">
+  <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
+    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
+  </div>
+</footer>
 <!-- container-scroller -->
 
 <!-- plugins:js -->
@@ -528,4 +528,3 @@
 </body>
 
 </html>
-
