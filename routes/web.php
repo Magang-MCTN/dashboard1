@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminGeneralController;
+use App\Http\Controllers\AdminManagerController;
 use App\Http\Controllers\AdminTimController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -56,6 +57,14 @@ Route::group(['middleware' => 'admin-general'], function () {
     Route::post('/admin-general/approve/{id}', [AdminGeneralController::class, 'approveRequesta'])->name('admin-general.approve');
     Route::post('/admin-general/reject/{id}', [AdminGeneralController::class, 'rejectRequesta'])->name('admin-general.reject');
     Route::get('/admin-general/detail/{id}', [AdminGeneralController::class, 'detail'])->name('admin-general.detail');
+    // ...
+});
+Route::group(['middleware' => 'admin-manager'], function () {
+    // Rute-rute yang hanya dapat diakses oleh admin tim
+    Route::get('/admin-manager', [AdminManagerController::class, 'index'])->name('adminmanager');
+    Route::post('/admin-manager/approve/{id}', [AdminmanagerController::class, 'approveRequestas'])->name('admin-manager.approve');
+    Route::post('/admin-manager/reject/{id}', [AdminmanagerController::class, 'rejectRequestas'])->name('admin-manager.reject');
+    Route::get('/admin-manager/detail/{id}', [AdminmanagerController::class, 'detail'])->name('admin-manager.detail');
     // ...
 });
 Route::group(['middleware' => 'administrator'], function () {

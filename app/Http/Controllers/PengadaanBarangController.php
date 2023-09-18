@@ -6,6 +6,7 @@ use App\Models\PengadaanBarang;
 use App\Models\Signature;
 use App\Models\User;
 use App\Notifications\Daftar;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Notification as FacadesNotification;
@@ -34,6 +35,11 @@ class PengadaanBarangController extends Controller
         $pengajuan->admintim = $request->input('admintim');
         $pengajuan->user_id = auth()->user()->id;
 
+        $hargaSatuan = $pengajuan->harga;
+        $jumlahBarang = $pengajuan->jumlah;
+        $hargaTotal = $hargaSatuan * $jumlahBarang;
+
+        $pengajuan->total = $hargaTotal;
         $pengajuan->save();
 
         $adminTim = User::find($request->admintim); // Gantilah dengan cara Anda mendapatkan admin tim berdasarkan ID
@@ -96,10 +102,16 @@ class PengadaanBarangController extends Controller
         }
         $adminTimUserId = $pengajuanBarang->admin_tim_id;
         $adminGeneralUserId = $pengajuanBarang->admin_general_id;
+        $adminManagerUserId = $pengajuanBarang->admin_manager_id;
+
         $adminTimSignature = Signature::where('user_id', $adminTimUserId)->first();
 
         // Ambil gambar tanda tangan admin general
         $adminGeneralSignature = Signature::where('user_id', $adminGeneralUserId)->first();
+
+
+        // Ambil gambar tanda tangan admin manager
+        $adminManagerSignature = Signature::where('user_id', $adminManagerUserId)->first();
 
         // Ambil nama admin tim
         $adminTimName = User::where('id', $adminTimUserId)->value('name');
@@ -107,30 +119,74 @@ class PengadaanBarangController extends Controller
         // Ambil nama admin general
         $adminGeneralName = User::where('id', $adminGeneralUserId)->value('name');
 
+        // Ambil nama admin manager
+        $adminManagerName = User::where('id', $adminManagerUserId)->value('name');
+
         // // Ambil tanda tangan admin tim
         // $adminTimSignature = Signature::find($pengajuanBarang->admin_tim_id);
 
         // // Ambil tanda tangan admin general
         // $adminGeneralSignature = Signature::find($pengajuanBarang->admin_general_id);
-        $path_logo = base_path('public/dashboard/template/images/MCTN.png');
-        $types = pathinfo($path_logo, PATHINFO_EXTENSION);
-        $datas = file_get_contents($path_logo);
-        $pics = 'data:public/dashboard/template/images/' . $types . ';base64,' . base64_encode($datas);
-        // Load view PDF yang telah Anda buat
-        $path = base_path('storage/app/public/signatures/' . $adminTimSignature->signature);
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $pic = 'data:storage/app/public/signatures/' . $type . ';base64,' . base64_encode($data);
-        $patha = base_path('storage/app/public/signatures/' .  $adminGeneralSignature->signature);
-        $typea = pathinfo($patha, PATHINFO_EXTENSION);
-        $dataa = file_get_contents($patha);
-        $pica = 'data:storage/app/public/signatures/' . $typea . ';base64,' . base64_encode($dataa);
-        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewid', compact('pengajuanBarang', 'adminTimSignature', 'adminGeneralSignature', 'pic', 'pica', 'adminTimName', 'adminGeneralName', 'pics'));
 
-        // Atur nama file PDF yang akan dihasilkan
-        $pdf->setPaper('A4', 'portrait'); // Atur ukuran dan orientasi kertas
+        if ($pengajuanBarang->total <= 2000000000) {
+            $path_logo = base_path('public/dashboard/template/images/MCTN.png');
+            $types = pathinfo($path_logo, PATHINFO_EXTENSION);
+            $datas = file_get_contents($path_logo);
+            $pics = 'data:public/dashboard/template/images/' . $types . ';base64,' . base64_encode($datas);
+            // Load view PDF yang telah Anda buat
+            $path = base_path('storage/app/public/signatures/' . $adminTimSignature->signature);
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $pic = 'data:storage/app/public/signatures/' . $type . ';base64,' . base64_encode($data);
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewtim', compact('pengajuanBarang', 'adminTimSignature',  'pic',  'adminTimName', 'pics'));
+            // Menyimpan atau mengirim PDF sesuai kebutuhan Anda
+            return $pdf->download('pengajuan_barang.pdf');
+        } elseif ($pengajuanBarang->total <= 20000000000) {
+            $path_logo = base_path('public/dashboard/template/images/MCTN.png');
+            $types = pathinfo($path_logo, PATHINFO_EXTENSION);
+            $datas = file_get_contents($path_logo);
+            $pics = 'data:public/dashboard/template/images/' . $types . ';base64,' . base64_encode($datas);
+            // Load view PDF yang telah Anda buat
+            $path = base_path('storage/app/public/signatures/' . $adminTimSignature->signature);
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $pic = 'data:storage/app/public/signatures/' . $type . ';base64,' . base64_encode($data);
+            $patha = base_path('storage/app/public/signatures/' .  $adminGeneralSignature->signature);
+            $typea = pathinfo($patha, PATHINFO_EXTENSION);
+            $dataa = file_get_contents($patha);
+            $pica = 'data:storage/app/public/signatures/' . $typea . ';base64,' . base64_encode($dataa);
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewid', compact('pengajuanBarang', 'adminTimSignature', 'adminGeneralSignature', 'pic', 'pica', 'adminTimName', 'adminGeneralName', 'pics'));
+            // Menyimpan atau mengirim PDF sesuai kebutuhan Anda
+            return $pdf->download('pengajuan_barang.pdf');
+        } else {
+            $path_logo = base_path('public/dashboard/template/images/MCTN.png');
+            $types = pathinfo($path_logo, PATHINFO_EXTENSION);
+            $datas = file_get_contents($path_logo);
+            $pics = 'data:public/dashboard/template/images/' . $types . ';base64,' . base64_encode($datas);
+            // Load view PDF yang telah Anda buat
+            $path = base_path('storage/app/public/signatures/' . $adminTimSignature->signature);
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $pic = 'data:storage/app/public/signatures/' . $type . ';base64,' . base64_encode($data);
+            $patha = base_path('storage/app/public/signatures/' .  $adminGeneralSignature->signature);
+            $typea = pathinfo($patha, PATHINFO_EXTENSION);
+            $dataa = file_get_contents($patha);
+            $pica = 'data:storage/app/public/signatures/' . $typea . ';base64,' . base64_encode($dataa);
+            //admin manager
+            $pathar = base_path('storage/app/public/signatures/' .  $adminManagerSignature->signature);
+            $typear = pathinfo($patha, PATHINFO_EXTENSION);
+            $dataar = file_get_contents($patha);
+            $picar = 'data:storage/app/public/signatures/' . $typea . ';base64,' . base64_encode($dataa);
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewmanager', compact('pengajuanBarang', 'adminTimSignature', 'adminGeneralSignature', 'pic', 'pica', 'adminTimName', 'adminGeneralName', 'pics', 'picar', 'adminManagerName'));
+            // Menyimpan atau mengirim PDF sesuai kebutuhan Anda
+            return $pdf->download('pengajuan_barang.pdf');
+        }
 
-        // Menghasilkan dan menampilkan PDF dalam browser
-        return $pdf->stream('pengajuan_barang_' . $pengajuanBarang->id . '.pdf');
+
+        // // Atur nama file PDF yang akan dihasilkan
+        // $pdf->setPaper('A4', 'portrait'); // Atur ukuran dan orientasi kertas
+
+        // // Menghasilkan dan menampilkan PDF dalam browser
+        // return $pdf->stream('pengajuan_barang_' . $pengajuanBarang->id . '.pdf');
     }
 }

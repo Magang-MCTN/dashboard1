@@ -475,6 +475,8 @@
                      <a class="nav-link" href="{{ route('admintim') }}"> Persetujuan </a></li>
                 @elseif(Auth::user()->level === 'Admin General')
                 <a class="nav-link" href="{{ route('admingeneral') }}"> Persetujuan </a></li>
+                @elseif(Auth::user()->level === 'Admin Manager')
+                <a class="nav-link" href="{{ route('adminmanager') }}"> Persetujuan </a></li>
                 @endif
               </ul>
             </div>

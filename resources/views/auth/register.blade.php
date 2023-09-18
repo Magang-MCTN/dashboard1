@@ -65,6 +65,7 @@
                                                 <option value="User">User</option>
                                                 <option value="Admin Tim">Admin Tim</option>
                                                 <option value="Admin General">Admin General</option>
+                                                <option value="Admin Manager">Admin Manager</option>
                                                 <option value="Administrator">Administrator</option>
                                             </select>
                                             <p class="py-2">Already have an account? <a href="/login">Login here</a></p>

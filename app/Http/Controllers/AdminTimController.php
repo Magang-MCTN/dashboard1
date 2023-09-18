@@ -13,7 +13,10 @@ class AdminTimController extends Controller
     public function index()
     {
         // Tampilkan daftar pengajuan barang yang perlu ditinjau oleh admin tim
-        $pengajuanBarang = PengadaanBarang::where('status', 'diajukan')->get();
+        $pengajuanBarang = PengadaanBarang::where('status', 'diajukan')
+
+            // Harga total kurang dari atau sama dengan 2 milyar
+            ->get();
         return view('admin-tim.index', compact('pengajuanBarang'));
     }
 

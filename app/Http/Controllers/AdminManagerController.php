@@ -7,27 +7,26 @@ use App\Notifications\ApprovalNotification;
 use App\Notifications\RejectNotification;
 use Illuminate\Http\Request;
 
-
-class AdminGeneralController extends Controller
+class AdminManagerController extends Controller
 {
     public function index()
     {
         // Menampilkan daftar pengadaan barang yang perlu ditinjau oleh admin general
-        $pengadaanBarang = PengadaanBarang::where('status', 'disetujui_admin_tim')
-            ->where('total', '>', 2000000000) // Harga total antara 2 milyar dan 20 milyar
+        $pengadaanBarang = PengadaanBarang::where('status', 'disetujui_admin_general')
+            ->where('total', '>', 20000000000) // Harga total di atas 20 milyar
             ->get();
-        return view('admin-general.index', compact('pengadaanBarang'));
+        return view('admin-manager.index', compact('pengadaanBarang'));
     }
 
     public function approveRequesta(Request $request, $id)
     {
         // Menyetujui pengajuan barang
-        $admingeneral = auth()->user();
+        $adminmanager = auth()->user();
         $pengadaan = PengadaanBarang::findOrFail($id);
-        $pengadaan->status = 'disetujui_admin_general';
+        $pengadaan->status = 'disetujui_admin_manager';
         $pengadaan->save();
         $pengajuanBarang = PengadaanBarang::find($id); // Sesuaikan dengan cara Anda mengidentifikasi pengajuan
-        $pengajuanBarang->admin_general_id = $admingeneral->id;
+        $pengajuanBarang->admin_manager_id = $adminmanager->id;
         $pengajuanBarang->save();
         $pengajuanBarang->user->notify(new ApprovalNotification($pengajuanBarang));
 
@@ -55,6 +54,6 @@ class AdminGeneralController extends Controller
     {
         $pengajuan = PengadaanBarang::findOrFail($id);
 
-        return view('admin-general.detail', compact('pengajuan'));
+        return view('admin-manager.detail', compact('pengajuan'));
     }
 }
