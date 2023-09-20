@@ -18,7 +18,7 @@ class AdminManagerController extends Controller
         return view('admin-manager.index', compact('pengadaanBarang'));
     }
 
-    public function approveRequesta(Request $request, $id)
+    public function approveRequestas(Request $request, $id)
     {
         // Menyetujui pengajuan barang
         $adminmanager = auth()->user();
@@ -33,14 +33,14 @@ class AdminManagerController extends Controller
         return redirect()->back()->with('success', 'Pengajuan barang telah disetujui.');
     }
 
-    public function rejectRequesta(Request $request, $id)
+    public function rejectRequestas(Request $request, $id)
     {
-        $admingeneral = auth()->user();
+        $adminmanager = auth()->user();
         $pengadaan = PengadaanBarang::findOrFail($id);
         $pengadaan->status = 'ditolak';
         $pengadaan->save();
         $pengajuanBarang = PengadaanBarang::find($id); // Sesuaikan dengan cara Anda mengidentifikasi pengajuan
-        $pengajuanBarang->admin_general_id = $admingeneral->id;
+        $pengajuanBarang->admin_general_id = $adminmanager->id;
         $pengajuanBarang->save();
         $pengajuanBarang->user->notify(new RejectNotification($pengajuanBarang));
         // Menolak pengajuan barang

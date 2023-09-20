@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Star Admin2 </title>
+  <title>PT MCTN</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('dashboard/template/vendors/feather/feather.css') }}">
   <link rel="stylesheet" href="{{ asset('dashboard/template/vendors/mdi/css/materialdesignicons.min.css') }}">
@@ -64,7 +64,7 @@
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
             <h1 class="welcome-text">Selamat Datang <span class="text-black fw-bold">{{ auth()->user()->name }}</span></h1>
-            <h3 class="welcome-sub-text">Anda Login sebagai <span class="text-black fw-bold"> {{ auth()->user()->level }}</span></h3>
+            <h3 class="welcome-sub-text">Anda Login sebagai <span class="text-black fw-bold"> {{ auth()->user()->jabatan }}</span></h3>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
@@ -451,7 +451,7 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="menu-icon mdi mdi-layers-outline"></i>
-              <span class="menu-title">SIGNATURE</span>
+              <span class="menu-title">Signature</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
@@ -464,20 +464,18 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
-              <span class="menu-title">User Pages</span>
+              <span class="menu-title">Persetujuan</span>
               <i class="menu-arrow"></i>
-
+            </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-
                 <li class="nav-item">
-                    @if(Auth::user()->level === 'Admin Tim')
-                     <a class="nav-link" href="{{ route('admintim') }}"> Persetujuan </a></li>
-                @elseif(Auth::user()->level === 'Admin General')
-                <a class="nav-link" href="{{ route('admingeneral') }}"> Persetujuan </a></li>
-                @elseif(Auth::user()->level === 'Admin Manager')
-                <a class="nav-link" href="{{ route('adminmanager') }}"> Persetujuan </a></li>
-                @endif
+                  @if (Auth::user()->level === 'Admin Tim')
+                  <a class="nav-link" href="{{ route('admintim') }}">Persetujuan</a>
+                  @elseif(Auth::user()->level === 'Admin General')
+                  <a class="nav-link" href="{{ route('admingeneral') }}">Persetujuan </a>
+                  @endif
+                </li>
               </ul>
             </div>
           </li>
@@ -530,3 +528,4 @@
 </body>
 
 </html>
+

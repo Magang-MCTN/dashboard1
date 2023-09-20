@@ -43,7 +43,7 @@ class Daftar extends Notification
 
 
         return (new MailMessage)
-
+            ->line('Ada Pengajuan yang harus Ditinjau, Silahkah klik dibawah ini !!!')
             ->line('ID Pengajuan: ' . $this->pengajuan->id)
             ->line('Diajukan oleh: ' . $this->pengajuan->user->name)
             ->action('Lihat Pengajuan', route('persetujuan-barang', ['id' => $this->pengajuan->id]))

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/decoupled-document/ckeditor.js"></script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-15">
@@ -30,11 +32,30 @@
                             <label for="harga">Harga</label>
                             <input type="number" name="harga" id="harga" class="form-control" required>
                         </div>
+                        <div class="form-group">
+                        <label for="dokumen">Silahkan Input Dokumen Pengajuan</label>
+                        <div id="toolbar-container"></div>
+                        <div id="dokumen" name="dokumen" id="dokumen">
+
+                        </div>
+
+                        <script>
+                            DecoupledEditor
+                                .create( document.querySelector( '#dokumen' ) )
+                                .then( editor => {
+                                    const toolbarContainer = document.querySelector( '#toolbar-container' );
+
+                                    toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+                                } )
+                                .catch( error => {
+                                    console.error( error );
+                                } );
+                        </script>
                         <div>
                         <label for="admintim">Pilih Admin Tim Tujuan:</label>
                         <select id="admintim" name="admintim">
-                            @foreach($adminTimList as $adminTimId => $adminTimName)
-                                <option value="{{ $adminTimId }}">{{ $adminTimName }}</option>
+                            @foreach($adminTimList as $adminTimId => $adminTimjabatan)
+                                <option value="{{ $adminTimId }}">{{ $adminTimjabatan }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -45,4 +66,9 @@
         </div>
     </div>
 </div>
+
+
+@endsection
+@section('ck-editor')
+    @include('ckeditor/setting')
 @endsection

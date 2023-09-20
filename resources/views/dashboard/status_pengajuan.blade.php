@@ -52,10 +52,12 @@
                                         @if($item->status === 'disetujui_admin_tim')
                                             <span class="badge badge-opacity-warning ">Disetujui Admin Tim </span>
 
-                                        @elseif($item->status === 'disetujui_admin_general')
+                                        @elseif($item->status === 'disetujui_admin_manager')
                                             <span class="badge badge-opacity-success">Disetujui  </span>
                                         @elseif($item->status === 'diajukan')
                                             <span class="badge badge-opacity-warning">Menunggu Persetujuan </span>
+                                            @elseif($item->status === 'disetujui_admin_general')
+                                            <span class="badge badge-opacity-warning">Telah Disetujui Admin General</span>
                                         @else
                                             <span class="badge badge-opacity-danger">Di Tolak</span>
                                         @endif

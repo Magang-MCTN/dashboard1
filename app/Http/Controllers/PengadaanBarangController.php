@@ -18,7 +18,7 @@ class PengadaanBarangController extends Controller
 {
     public function index()
     {
-        $adminTimList = User::where('level', 'Admin Tim')->pluck('name', 'id');
+        $adminTimList = User::where('level', 'Admin Tim')->pluck('jabatan', 'id', 'jabatan');
         // Menampilkan formulir pengajuan barang
         return view('dashboard.pengajuan', compact('adminTimList'));
     }
@@ -30,6 +30,7 @@ class PengadaanBarangController extends Controller
         $pengajuan->nomor_pengadaan = $request->input('nomor_pengadaan');
         $pengajuan->jumlah = $request->input('jumlah');
         $pengajuan->harga = $request->input('harga');
+        $pengajuan->dokumen = $request->input('dokumen');
         $pengajuan->tanggal_pengajuan = now();
         $pengajuan->status = 'diajukan';
         $pengajuan->admintim = $request->input('admintim');
@@ -122,6 +123,14 @@ class PengadaanBarangController extends Controller
         // Ambil nama admin manager
         $adminManagerName = User::where('id', $adminManagerUserId)->value('name');
 
+        // Ambil nama admin tim
+        $adminTimjabatan = User::where('id', $adminTimUserId)->value('jabatan');
+
+        // Ambil nama admin general
+        $adminGeneraljabatan = User::where('id', $adminGeneralUserId)->value('jabatan');
+
+        // Ambil nama admin manager
+        $adminManagerjabatan = User::where('id', $adminManagerUserId)->value('jabatan');
         // // Ambil tanda tangan admin tim
         // $adminTimSignature = Signature::find($pengajuanBarang->admin_tim_id);
 
@@ -138,7 +147,7 @@ class PengadaanBarangController extends Controller
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $pic = 'data:storage/app/public/signatures/' . $type . ';base64,' . base64_encode($data);
-            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewtim', compact('pengajuanBarang', 'adminTimSignature',  'pic',  'adminTimName', 'pics'));
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewtim', compact('pengajuanBarang', 'adminTimSignature',  'pic',  'adminTimName', 'pics', 'adminTimjabatan'));
             // Menyimpan atau mengirim PDF sesuai kebutuhan Anda
             return $pdf->download('pengajuan_barang.pdf');
         } elseif ($pengajuanBarang->total <= 20000000000) {
@@ -155,7 +164,7 @@ class PengadaanBarangController extends Controller
             $typea = pathinfo($patha, PATHINFO_EXTENSION);
             $dataa = file_get_contents($patha);
             $pica = 'data:storage/app/public/signatures/' . $typea . ';base64,' . base64_encode($dataa);
-            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewid', compact('pengajuanBarang', 'adminTimSignature', 'adminGeneralSignature', 'pic', 'pica', 'adminTimName', 'adminGeneralName', 'pics'));
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewid', compact('pengajuanBarang', 'adminTimSignature', 'adminGeneralSignature', 'pic', 'pica', 'adminTimName', 'adminGeneralName', 'pics', 'adminTimjabatan', 'adminGeneraljabatan'));
             // Menyimpan atau mengirim PDF sesuai kebutuhan Anda
             return $pdf->download('pengajuan_barang.pdf');
         } else {
@@ -177,7 +186,7 @@ class PengadaanBarangController extends Controller
             $typear = pathinfo($patha, PATHINFO_EXTENSION);
             $dataar = file_get_contents($patha);
             $picar = 'data:storage/app/public/signatures/' . $typea . ';base64,' . base64_encode($dataa);
-            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewmanager', compact('pengajuanBarang', 'adminTimSignature', 'adminGeneralSignature', 'pic', 'pica', 'adminTimName', 'adminGeneralName', 'pics', 'picar', 'adminManagerName'));
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pengadaan.viewmanager', compact('pengajuanBarang', 'adminTimSignature', 'adminManagerSignature', 'adminGeneralSignature', 'pic', 'pica', 'adminTimName', 'adminGeneralName', 'pics', 'picar', 'adminManagerName', 'adminTimjabatan', 'adminGeneraljabatan', 'adminManagerjabatan'));
             // Menyimpan atau mengirim PDF sesuai kebutuhan Anda
             return $pdf->download('pengajuan_barang.pdf');
         }

@@ -24,14 +24,14 @@
 
                     <div class="d-flex">
                         @if($pengajuan->status === 'disetujui_admin_general')
-                        <form action="{{ route('approveRequest', $pengajuan->id) }}" method="POST">
+                        <form action="{{ route('admin-manager.approve', $pengajuan->id) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-success me-2" id="btn-approve">Setuju</button>
                         </form>
                         @endif
 
                         @if($pengajuan->status === 'disetujui_admin_general')
-                        <form action="{{ route('rejectRequest', $pengajuan->id) }}" method="POST">
+                        <form action="{{ route('admin-manager.reject', $pengajuan->id) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-danger" id="btn-reject">Tolak</button>
                         </form>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="d-flex">
                         <div id="alasan-form" style="display: none;">
-                            <form action="{{ route('approveRequest', $pengajuan->id) }}" method="POST">
+                            <form action="{{ route('admin-manager.approve', $pengajuan->id) }}" method="POST">
                                 @csrf
                                 <div class="form-group my-3 me-3">
                                     <label for="alasan">Alasan Setuju:</label><br>
@@ -50,7 +50,7 @@
                         </div>
 
                         <div id="alasan-tolak-form" style="display: none;">
-                            <form action="{{ route('rejectRequest', $pengajuan->id) }}" method="POST">
+                            <form action="{{ route('admin-manager.reject', $pengajuan->id) }}" method="POST">
                                 @csrf
                                 <div class="form-group my-3 me-3">
                                     <label for="alasan">Alasan Tolak:</label><br>

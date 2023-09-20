@@ -54,7 +54,7 @@ class RejectNotification extends Notification
             ->line('Diajukan oleh: ' . $this->pengajuan->user->name)
             ->line('Permintaan Anda Telah Ditolak  ')
             ->line('Dengan Alasan ' . $this->pengajuan->alasan)
-            ->action('Klik Disini Untuk melihat', route('pengajuan-barang', ['id' => $this->pengajuan->id]))
+            ->action('Klik Disini Untuk melihat', route('detail', ['id' => $this->pengajuan->id]))
             ->line('Terimakasih Telah Mengajukan Barang')
             ->line('PT MANDAU CIPTA TENAGA NUSANTARA');
     }

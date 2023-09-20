@@ -209,12 +209,14 @@
                                       </th>
                                       <th>User</th>
                                       <th>Nama Pengadaan</th>
-                                      <th>No. Pengadaan</th>
-                                      <th>Status</th>
+                                      <th>Harga</th>
+                                      <th>Tanggal</th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                   @foreach ($pengadaanBarangUser as $item)
+
+
                                     <tr>
                                       <td>
                                         <div class="form-check form-check-flat mt-0">
@@ -225,28 +227,24 @@
                                         <div class="d-flex ">
                                           <img src="/dashboard/template/images/faces/face1.jpg" alt="">
                                           <div>
-                                            <h6>{{ auth()->user()->name }}</h6>
-                                            <p>{{ auth()->user()->level }}</p>
+                                            <h6>{{ $item->nomor_pengadaan }}</h6>
+                                            <p>{{ $item->status }}</p>
                                           </div>
                                         </div>
                                       </td>
                                       <td>
-                                        <h6>LAPTOP</h6>
+                                        <h6>{{ $item->nama_barang }}</h6>
                                       </td>
                                       <td>
                                         <div>
-                                          <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                            <p class="text-success">79%</p>
-                                            <p>85/162</p>
+                                            <h6>{{ $item->total}}</h6>
                                           </div>
-                                          <div class="progress progress-md">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                          </div>
-                                        </div>
+
+
                                       </td>
-                                      <td><div class="badge badge-opacity-warning">In progress</div></td>
+                                      <td><div class="badge badge-opacity-warning">{{ $item->tanggal_pengajuan }}</div></td>
                                     </tr>
-                                    <?php } ?>
+                                    @endforeach
                                   </tbody>
                                 </table>
                               </div>

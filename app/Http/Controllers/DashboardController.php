@@ -11,9 +11,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-
-
-        return view('dashboard.home');
+        $query = PengadaanBarang::query();
+        $pengadaanBarang = $query->get();
+        $pengadaanBarangUser = PengadaanBarang::where('user_id', auth()->user()->id)->get();
+        return view('dashboard.home', compact('pengadaanBarangUser'));
     }
 
     public function signature()

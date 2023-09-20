@@ -115,7 +115,7 @@
 
     <div class="signature">
         <div class="sign-1">
-            <p>Admin Tim</p>
+            <p>{{$adminTimjabatan}}</p>
             @if ($adminTimSignature)
                 <img class="ttd" src="<?php echo $pic ?>" width="200px" alt="">
                 <p>{{ $adminTimName }}</p>
@@ -124,9 +124,19 @@
             @endif
 
         </div>
+
+        <div class="sign-2">
+            <p>{{$adminGeneraljabatan}}</p>
+            @if ($adminGeneralSignature)
+                <img class="ttd" src="<?php echo $pica ?>" width="200px" alt="">
+                <p>{{ $adminGeneralName }}</p>
+            @else
+                <p>Tidak ada tanda tangan Admin General</p>
+            @endif
+        </div>
         <div class="signature">
             <div class="sign-3">
-                <p>Admin Tim</p>
+                <p>{{$adminManagerjabatan}}</p>
                 @if ($adminManagerSignature)
                     <img class="ttd" src="<?php echo $picar ?>" width="200px" alt="">
                     <p>{{ $adminManagerName }}</p>
@@ -135,15 +145,6 @@
                 @endif
 
             </div>
-        <div class="sign-2">
-            <p>Admin General</p>
-            @if ($adminGeneralSignature)
-                <img class="ttd" src="<?php echo $pica ?>" width="200px" alt="">
-                <p>{{ $adminGeneralName }}</p>
-            @else
-                <p>Tidak ada tanda tangan Admin General</p>
-            @endif
-        </div>
         <div class="clear"></div> <!-- Membersihkan float -->
     </div>
 </body>

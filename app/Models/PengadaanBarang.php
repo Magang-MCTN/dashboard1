@@ -9,7 +9,7 @@ class PengadaanBarang extends Model
 {
     public $table = "pengadaan_barang";
     protected $fillable = [
-        'nama_barang', 'nomor_pengadaan', 'jumlah', 'harga', 'tanggal_pengajuan', 'status', 'user_id', 'admintim',
+        'nama_barang', 'nomor_pengadaan', 'jumlah', 'harga', 'tanggal_pengajuan', 'status', 'user_id', 'admintim', 'dokumen',
     ];
 
     public function user()

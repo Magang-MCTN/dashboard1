@@ -115,7 +115,7 @@
 
     <div class="signature">
         <div class="sign-1">
-            <p>Admin Tim</p>
+            <p>{{$adminTimjabatan}}</p>
             @if ($adminTimSignature)
                 <img class="ttd" src="<?php echo $pic ?>" width="200px" alt="">
                 <p>{{ $adminTimName }}</p>

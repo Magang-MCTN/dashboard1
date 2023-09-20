@@ -20,9 +20,11 @@
                     <span class="badge bg-warning">Disetujui Admin Tim </span>
 
                 @elseif($pengajuan->status === 'disetujui_admin_general')
-                        <span class="badge bg-success">Disetujui  </span>
+                        <span class="badge bg-success">Disetujui Admin General  </span>
                         @elseif($pengajuan->status === 'diajukan')
                         <span class="badge bg-warning">Menunggu Persetujuan </span>
+                        @elseif($pengajuan->status === 'disetujui_admin_manager')
+                        <span class="badge bg-warning">Telah Disetujui Admin Manager</span>
                 @else
                     <span class="badge badge-danger">Di Tolak</span>
                 @endif
