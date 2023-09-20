@@ -525,6 +525,21 @@
 <script src="{{ asset('dashboard/template/js/dashboard.js') }}"></script>
 <script src="{{ asset('dashboard/template/js/Chart.roundedBarCharts.js') }}"></script>
 <!-- End custom js for this page-->
+<!-- Masukkan kode jQuery ke dalam halaman Anda (pastikan jQuery telah dimuat sebelumnya) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Kemudian tambahkan skrip berikut untuk menampilkan pesan kesalahan sebagai pop-up -->
+<script>
+    $(document).ready(function() {
+        // Periksa apakah ada pesan kesalahan
+        var errorMessage = "{{ session('error') }}";
+
+        if (errorMessage !== '') {
+            // Tampilkan pesan kesalahan sebagai pop-up
+            alert(errorMessage);
+        }
+    });
+</script>
 </body>
 
 </html>

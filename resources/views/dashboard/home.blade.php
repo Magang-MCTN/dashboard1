@@ -237,7 +237,7 @@
                                       </td>
                                       <td>
                                         <div>
-                                            <h6>{{ $item->total}}</h6>
+                                            <h6>@currency($item->total)</h6>
                                           </div>
 
 

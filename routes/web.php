@@ -77,6 +77,9 @@ Route::post('/pengajuan-barang', [PengadaanBarangController::class, 'store'])->n
 Route::get('/status-pengadaan', [PengadaanBarangController::class, 'status'])->name('status-pengadaan')->middleware('auth');
 Route::get('/pengadaan', [PengadaanBarangController::class, 'status'])->name('pengadaan.index')->middleware('auth');
 Route::get('/status', [PengadaanBarangController::class, 'status'])->name('status')->middleware('auth');
+Route::get('/pengajuan/{id}/edit', [PengadaanBarangController::class, 'edit'])->name('edit')->middleware('auth');
+// Route::get('/pengajuan/{id}/ajukan-ulang', [PengadaanBarangController::class, 'ajukanUlang'])->name('ajukanUlang')->middleware('auth');
+Route::put('/pengajuan/{id}/ajukan-ulang', [PengadaanBarangController::class, 'ajukanUlang'])->name('ajukanUlang')->middleware('auth');
 
 Route::get('/status-pengadaan/{id}', [PengadaanBarangController::class, 'detail'])->name('detail')->middleware('auth');
 //Profile

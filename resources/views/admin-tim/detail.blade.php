@@ -11,7 +11,7 @@
                     <h5>Nama Barang: {{ $pengajuan->nama_barang }}</h5>
                     <p>Nomor Pengadaan: {{ $pengajuan->nomor_pengadaan }}</p>
                     <p>Jumlah: {{ $pengajuan->jumlah }}</p>
-                    <p>Harga: {{ $pengajuan->harga }}</p>
+                    <p>Harga: @currency($pengajuan->harga))</p>
                     <p>Tanggal Pengajuan: {{ $pengajuan->tanggal_pengajuan }}</p>
 
                     <!-- Menampilkan alasan pengajuan jika sudah disetujui -->

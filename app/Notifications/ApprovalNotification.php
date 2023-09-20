@@ -10,16 +10,17 @@ use Illuminate\Notifications\Notification;
 class ApprovalNotification extends Notification
 {
     use Queueable;
-
+    protected $pengajuan;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($pengajuan)
     {
-        //
+        $this->pengajuan = $pengajuan;
     }
+
 
     /**
      * Get the notification's delivery channels.
@@ -44,7 +45,7 @@ class ApprovalNotification extends Notification
 
             // ->view('vendor.notifications.email', compact('pics'))
             ->line('Selamat Pengajuan Anda Telah Disetujui, SIlahkan Klik Dibawah ini untuk masuk ke pengajuan anda ')
-            ->action('Klik Disini', url('/'))
+            ->action('Klik Disini', route('persetujuan-barang', ['id' => $this->pengajuan->id]))
             ->line('Terimakasih Telah Mengajukan Barang')
             ->line('PT MANDAU CIPTA TENAGA NUSANTARA');
     }

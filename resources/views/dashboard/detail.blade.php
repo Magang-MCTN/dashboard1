@@ -29,10 +29,15 @@
                     <span class="badge badge-danger">Di Tolak</span>
                 @endif
                 <div class="d-flex justify-content-between">
+                    <div>
+                        <a href="{{ route('status-pengadaan') }}" class="btn btn-outline-dark">Kembali</a>
+                        @if($pengajuan->status === 'ditolak')
+                            <a href="{{ route('edit', $pengajuan->id) }}" class="btn btn-info">Edit</a>
+                            {{-- <a href="" class="btn btn-info">Edit</a> --}}
+                        @else
+                        @endif
 
-                    <a href="{{ route('status-pengadaan') }}" class="btn btn-secondary">Kembali</a>
-
-
+                    </div>
                     <div  class="d-flex justify-content-end btn-wrapper">
                         <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a>
                         <a href="{{ url('/generate-pdf/'.$pengajuan->id) }}" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
