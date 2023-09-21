@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/decoupled-document/ckeditor.js"></script>
+
 
 <div class="container">
     <div class="row justify-content-center">
@@ -37,20 +37,21 @@
                         <div id="toolbar-container"></div>
                         <div id="dokumen" name="dokumen" id="dokumen">
 
+
+
+                                <div class="form-group">
+                                    <textarea class="ckeditor form-control" name="dokumen"></textarea>
+                                </div>
+                            </form>
                         </div>
+                    </body>
+                    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('.ckeditor').ckeditor();
+                        });
+                    </script>
 
-                        <script>
-                            DecoupledEditor
-                                .create( document.querySelector( '#dokumen' ) )
-                                .then( editor => {
-                                    const toolbarContainer = document.querySelector( '#toolbar-container' );
-
-                                    toolbarContainer.appendChild( editor.ui.view.toolbar.element );
-                                } )
-                                .catch( error => {
-                                    console.error( error );
-                                } );
-                        </script>
                         <div>
                         <label for="admintim">Pilih Admin Tim Tujuan:</label>
                         <select id="admintim" name="admintim">
@@ -69,6 +70,4 @@
 
 
 @endsection
-@section('ck-editor')
-    @include('ckeditor/setting')
-@endsection
+

@@ -527,6 +527,7 @@
 <!-- End custom js for this page-->
 <!-- Masukkan kode jQuery ke dalam halaman Anda (pastikan jQuery telah dimuat sebelumnya) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/decoupled-document/ckeditor.js"></script>
 
 <!-- Kemudian tambahkan skrip berikut untuk menampilkan pesan kesalahan sebagai pop-up -->
 <script>
