@@ -99,7 +99,8 @@
         $jumlahBarang = $pengajuanBarang->jumlah;
 
         // Menghitung harga total
-        $hargaTotal = $hargaPerBarang * $jumlahBarang;
+        $hargaTotal = $pengajuanBarang->total;
+        $dokumen = $pengajuanBarang->dokumen;
         ?>
         <p>Rp. {{ $hargaTotal }}</p>
 
@@ -126,6 +127,9 @@
         </div>
 
         <div class="clear"></div> <!-- Membersihkan float -->
+        <div style="page-break-before: always"></div>
+       {  {$dokumen} }
+        <div style="page-break-after: always"></div>
     </div>
 </body>
 </html>

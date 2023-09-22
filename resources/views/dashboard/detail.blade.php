@@ -13,7 +13,7 @@
                     <p>Jumlah: {{ $pengajuan->jumlah }}</p>
                     <p>Harga: @currency( $pengajuan->harga)  </p>
                     <p>Tanggal Pengajuan: {{ $pengajuan->tanggal_pengajuan }}</p>
-                    <p>Dokumen: {{ $pengajuan->dokumen }}</p>
+                    <p>Dokumen: {!! $pengajuan->dokumen !!}</p>
                     <!-- Tampilkan informasi lain yang relevan sesuai kebutuhan Anda -->
 
                     <!-- Tambahkan tautan atau tombol untuk kembali ke daftar pengajuan -->
