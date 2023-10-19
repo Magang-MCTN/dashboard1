@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboard/app')
 
 @section('content')
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/decoupled-document/ckeditor.js"></script>

@@ -61,13 +61,13 @@
                                                 </span>
                                             @enderror
                                             <input id="password-confirm" type="password" placeholder="Confirm Password" class="form-control" name="password_confirmation" required autocomplete="new-password"><br>
-                                            <select id="level" class="form-control @error('level') is-invalid @enderror" name="level" required>
+                                            {{-- <select id="level" class="form-control @error('level') is-invalid @enderror" name="level" required>
                                                 <option value="User">User</option>
                                                 <option value="Admin Tim">Admin Tim</option>
                                                 <option value="Admin General">Admin General</option>
                                                 <option value="Admin Manager">Admin Manager</option>
                                                 <option value="Administrator">Administrator</option>
-                                            </select>
+                                            </select> --}}
                                             <p class="py-2">Already have an account? <a href="/login">Login here</a></p>
                                             @error('level')
                                                 <span class="invalid-feedback" role="alert">

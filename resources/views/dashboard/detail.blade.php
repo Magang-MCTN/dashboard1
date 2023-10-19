@@ -37,6 +37,9 @@
                             {{-- <a href="" class="btn btn-info">Edit</a> --}}
                         @else
                         @endif
+                        <td>
+                            <a href="{{ route('pengadaan.delete', ['id' => $pengajuan->id]) }}" class="btn btn-danger">Hapus</a>
+                        </td>
 
                     </div>
                     <div  class="d-flex justify-content-end btn-wrapper">

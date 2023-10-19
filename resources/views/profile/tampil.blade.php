@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('dashboard/app')
 
 @section('content')
 
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="{{ asset('dashboard/template/css/kalender/style.css') }}">
+{{-- <link rel="stylesheet" href="{{ asset('dashboard/template/css/kalender/style.css') }}"> --}}
 
 <div class="d-flex justify-content-center m-5 p-2">
     <div class="mb-3 d-flex justify-content-around">
@@ -26,7 +26,7 @@
               <div class="col-sm-5" id="contentcard">
                 <div class="row">
                   <div class="col-sm-3">
-                    <h6 class="mb-0">Full Name</h6>
+                    <h6 class="mb-0">Name</h6>
                   </div>
                   <div class="col-sm-9 text-secondary">
                       {{ $users['name'] }}
@@ -49,6 +49,16 @@
                   </div>
                   <div class="col-sm-9 text-secondary">
                       {{ $users['level'] }}
+                  </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Jabatan</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                      {{ $users['jabatan'] }}
                   </div>
                 </div>
                 <hr>
@@ -84,7 +94,7 @@
               <div class="row">
               </div>
               {{-- kalender --}}
-              <div class="container ml-5">
+              {{-- <div class="container ml-5">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="calendar calendar-first" id="calendar_first">
@@ -98,7 +108,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
             </div>
       </div>
       <link rel="stylesheet" href="{{ asset('dashboard\template\css\profile.css') }}">
@@ -131,11 +141,11 @@
     <!-- Tambahkan pustaka Bootstrap JavaScript (Popper.js dan Bootstrap JS) -->
 
 
-
+    {{--
     <script src="{{ asset('dashboard\template\js\kalender\jquery.min.js') }}"></script>
     <script src="{{ asset('dashboard\template\js\kalender\popper.js') }}"></script>
     <script src="{{ asset('dashboard\template\js\kalender\bootstrap.min.js') }}"></script>
-    <script src="{{ asset('dashboard\template\js\kalender\main.js') }}"></script>
+    <script src="{{ asset('dashboard\template\js\kalender\main.js') }}"></script> --}}
 
 
 </div>

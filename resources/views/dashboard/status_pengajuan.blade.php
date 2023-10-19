@@ -1,5 +1,5 @@
 <!-- resources/views/status_pengadaan.blade.php -->
-@extends('layouts.app')
+@extends('dashboard.app')
 
 @section('content')
 <div class="container">

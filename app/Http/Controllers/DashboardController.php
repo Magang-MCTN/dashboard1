@@ -11,10 +11,33 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $totalBarang = PengadaanBarang::count();
+        $barangDisetujui2 = PengadaanBarang::where('status', 'disetujui_admin_manager')->count();
+        $barangDisetujui1 = PengadaanBarang::where('status', 'disetujui_admin_general')->count();
+        $barangDisetujui = PengadaanBarang::where('status', 'disetujui_admin_tim')->count();
+        $barangDitolak = PengadaanBarang::where('status', 'ditolak')->count();
+        $barangDiajukan = PengadaanBarang::where('status', 'diajukan')->count();
         $query = PengadaanBarang::query();
         $pengadaanBarang = $query->get();
-        $pengadaanBarangUser = PengadaanBarang::where('user_id', auth()->user()->id)->get();
-        return view('dashboard.home', compact('pengadaanBarangUser'));
+        $pengadaanBarangUser = PengadaanBarang::where('user_id', auth()->user()->id)->paginate(10);
+
+        return view('dashboard.home', compact('pengadaanBarangUser', 'totalBarang', 'barangDisetujui', 'barangDitolak', 'barangDiajukan', 'barangDisetujui1', 'barangDisetujui2'));
+    }
+    public function getChartData()
+    {
+        $totalBarang = PengadaanBarang::count();
+        $barangDiajukan = PengadaanBarang::where('status', 'diajukan')->count();
+        $barangDisetujui = PengadaanBarang::where('status', 'disetujui_admin_manager')->count();
+        $barangDitolak = PengadaanBarang::where('status', 'ditolak')->count();
+
+        $data = [
+            'total' => $totalBarang,
+            'diajukan' => $barangDiajukan,
+            'disetujui' => $barangDisetujui,
+            'ditolak' => $barangDitolak,
+        ];
+
+        return response()->json($data);
     }
 
     public function signature()

@@ -26,7 +26,7 @@ class User extends Authenticatable
 
 
     ];
-
+    const LEVELS = ['Admin Tim', 'Admin Manager', 'Admin General', 'User'];
     /**
      * The attributes that should be hidden for serialization.
      *

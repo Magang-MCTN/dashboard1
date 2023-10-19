@@ -67,6 +67,19 @@
                         @endif
                 </div>
                 <br>
+                <div class="form-group row mb-0">
+                    <div class="col-md-8 offset-md-4">
+
+                        <!-- tambahkan script di bawah ini untuk membuat tombol signin google -->
+                        <a class="btn btn-danger" href="{{ '/auth/redirect'}}">google</a>
+
+                        @if (Route::has('password.request'))
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                {{ __('Forgot Your Password?') }}
+                            </a>
+                        @endif
+                    </div>
+                </div>
                 <div class="mb-2 d-flex justify-content-center">
                   <button type="button" class="btn btn-block btn-microsoft auth-form-btn">
                     <i class="ti-microsoft me-2"></i>Connect using Microsoft

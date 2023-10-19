@@ -18,9 +18,13 @@ class PengadaanBarangController extends Controller
 {
     public function index()
     {
+        $totalBarang = PengadaanBarang::count();
+        $barangDisetujui = PengadaanBarang::where('status', 'disetujui')->count();
+        $barangDitolak = PengadaanBarang::where('status', 'ditolak')->count();
+
         $adminTimList = User::where('level', 'Admin Tim')->pluck('jabatan', 'id', 'jabatan');
         // Menampilkan formulir pengajuan barang
-        return view('dashboard.pengajuan', compact('adminTimList'));
+        return view('dashboard.pengajuan', compact('adminTimList', 'totalBarang', 'barangDisetujui', 'barangDitolak'));
     }
 
     public function store(Request $request)
@@ -65,11 +69,15 @@ class PengadaanBarangController extends Controller
             $query->where('nama_barang', 'like', '%' . $searchKeyword . '%');
         }
 
+        // Hanya menampilkan pengadaan barang yang diajukan oleh pengguna yang sedang login.
+        $query->where('user_id', auth()->user()->id);
+
         $pengadaanBarang = $query->get();
         $pengadaanBarangUser = PengadaanBarang::where('user_id', auth()->user()->id)->get();
 
         return view('dashboard.status_pengajuan', compact('pengadaanBarang', 'selectedStatus', 'pengadaanBarangUser', 'searchKeyword'));
     }
+
     public function detail($id)
     {
         $pengajuan = PengadaanBarang::findOrFail($id);
@@ -108,21 +116,7 @@ class PengadaanBarangController extends Controller
 
         return redirect()->route('detail', $id)->with('success', 'Pengajuan berhasil diajukan ulang.');
     }
-    // public function generatePengajuanBarangPdf()
-    // {
-    //     // Ambil data pengajuan barang dari database
-    //     $pengajuanBarang = PengadaanBarang::all();
 
-    //     // Load view PDF yang telah Anda buat
-    //     $pdf = PDF::loadView('pengadaan.view', compact('pengajuanBarang', 'adminTimSignature', 'adminGeneralSignature'));
-
-
-    //     // Atur nama file PDF yang akan dihasilkan
-    //     $pdf->setPaper('A4', 'portrait'); // Atur ukuran dan orientasi kertas
-
-    //     // Menghasilkan dan menampilkan PDF dalam browser
-    //     return $pdf->stream('pengadaan.view.pdf');
-    // }
     public function generatePdf($id)
     {
         // try {
@@ -225,10 +219,20 @@ class PengadaanBarangController extends Controller
         // } catch (\Exception $e) {
         return redirect()->route('detail', ['id' => $id])->with('error', 'Tidak bisa mencetak PDF karena pengajuan belum selesai diproses !!');
     }
+    public function delete($id)
+    {
+        $pengajuanBarang = PengadaanBarang::find($id);
 
-    // // Atur nama file PDF yang akan dihasilkan
-    // $pdf->setPaper('A4', 'portrait'); // Atur ukuran dan orientasi kertas
+        if (!$pengajuanBarang) {
+            return redirect()->route('status')->with('error', 'Pengajuan barang tidak ditemukan.');
+        }
 
-    // // Menghasilkan dan menampilkan PDF dalam browser
-    // return $pdf->stream('pengajuan_barang_' . $pengajuanBarang->id . '.pdf');
+        // Pastikan pengguna yang menghapus adalah pemilik pengajuan atau admin yang berwenang.
+        if (auth()->user()->id === $pengajuanBarang->user_id || auth()->user()->level === 'Admin Tim' || auth()->user()->level === 'Admin Manager') {
+            $pengajuanBarang->delete();
+            return redirect()->route('status')->with('success', 'Pengajuan barang berhasil dihapus.');
+        } else {
+            return redirect()->route('status')->with('error', 'Anda tidak memiliki izin untuk menghapus pengajuan barang ini.');
+        }
+    }
 }
